@@ -14,7 +14,6 @@ public class SenderRecieverAppl {
 				.limit(N_RECIEVERS).toList();
 		recievers.forEach(Reciever::start);
 		sender.start();
-		Thread.sleep(100);
 		recievers.forEach(thr -> thr.interrupt());
 	}
 }

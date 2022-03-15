@@ -11,12 +11,16 @@ public class Reciever extends Thread {
 	}
 	@Override
 	public void run() {
+		String message = null;
 		while(true) {
 			try {
-				String message = messageBox.getText();
+				message = messageBox.getText();
 				System.out.printf("%s - %s\n", getName(), message);
 			} catch (InterruptedException e) {
 				// TODO done
+				while(messageBox.pullText() != null) {
+					System.out.printf("%s - %s\n", getName(), message);
+				}
 				break;
 			}
 		}

@@ -11,7 +11,7 @@ public class MessageBox {
 			}
 		}
 		this.text = text;
-		this.notify();
+		this.notifyAll();
 	}
 	public synchronized String getText() throws InterruptedException {
 		while (text == null) {
@@ -23,6 +23,9 @@ public class MessageBox {
 		return res;
 	}
 	public synchronized String pullText() {
-		return text;
+		String res = text;
+		text = null;
+		this.notifyAll();
+		return res;
 	}
 }
